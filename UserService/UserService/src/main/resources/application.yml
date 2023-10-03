@@ -1,0 +1,59 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+           jwt:
+             issuer-uri: https://dev-48493643.okta.com/oauth2/default
+      client:
+         registration:
+            my-internal-client:
+                provider:
+                authorization-grant-type: client_credentials
+                scope: internal
+                client-id: 0oab3d468vF4XGcWV5d7
+                client-secret: 17XXcMhV7dy827_Z9FBWSVJ7B7mu9z9n84jO9R9YO2NB9k8wq1rucyiniTb9xKAA
+        
+     
+                          
+             
+ 
+
+management:
+   health:
+    circuitbreakers:
+       enabled: true
+          
+   endpoints:
+      web:
+       exposure:
+         include: health
+  
+   endpoint:
+       health:
+        show-details: always
+        
+        
+
+           
+resilience4j:                   
+  retry:
+    instances:
+      ratingHotelService:
+        maxRetryAttempts: 3
+        waitDuration: 2s
+        
+        
+  rateLimiter:
+     instances:
+       userRateLimiter:
+          limit-refresh-period: 4s
+          limit-for-period: 2
+          timeout-duration: 0s      
+          
+          
+okta:
+ outh2:
+  issuer: https://dev-48493643.okta.com/oauth2/default
+  audience: api://default
+          
+          
